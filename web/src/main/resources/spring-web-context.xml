@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					     http://www.springframework.org/schema/context
+	   					      http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	   					       http://www.springframework.org/schema/mvc
+	   					        http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- DispatcherServlet Context: defines this servlet's request-processing
+		infrastructure -->
+
+    <!-- Enables the Spring MVC @Controller programming model -->
+    <mvc:annotation-driven  conversion-service="conversionService"/>
+    <context:annotation-config/>
+    <context:component-scan base-package="by.IvkoS.web"/>
+
+    <import resource="classpath:spring-context-jms.xml" />
+   <!-- <import resource="classpath:spring-mongo-db.xml" />
+    <import resource="classpath:spring-rest-config.xml" />-->
+
+    <!-- Used to serve static resources like css, images and javascript files-->
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/image/**" location="/image/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+<!--    <mvc:resources mapping="/files/**" location="/files/"/>-->
+
+    <!-- Resolves views selected for rendering by @Controllers to .jsp resources
+         in the /WEB-INF/views directory -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/views/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+        <property name="order" value="2"/>
+    </bean>
+
+    <!--Resolver for tiles-->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+        <property name="order" value="1"/>
+    </bean>
+
+    <!-- Tiles configuration -->
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles/tiles-definitions.xml</value>
+            </list>
+        </property>
+    </bean>
+
+
+   <!-- Configure Converter to be used.
+    In our example, we need a converter to convert string values[Roles] to UserProfiles in newUser.jsp
+    Only interesting thing in this class is registration of a converter who will be responsible for
+    converting an id into an Object.This is required to handle one-to-many relationship in JSP.
+    During User creation, A User can be allocated multiple roles/userProfiles, and so we need a converter
+    to map a particular role/userProfile to a user based on profile id. Below provided is the converter class.-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean id="roleToUserProfile" class="by.IvkoS.web.convertors.RoleToUserProfileConverter" />
+            </set>
+        </property>
+    </bean>
+
+    <util:properties id="propertyConfig" location="classpath:reCAPTCHA.properties"/>
+
+</beans>

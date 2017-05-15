@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <version>1.0</version>
+    <artifactId>database</artifactId>
+    <packaging>jar</packaging>
+    <name>database</name>
+
+    <parent>
+        <artifactId>module_project</artifactId>
+        <groupId>by.IvkoS</groupId>
+        <version>1.0</version>
+    </parent>
+
+    <properties>
+        <org.hibernate>5.2.8.Final</org.hibernate>
+        <spring-security-crypto>4.2.2.RELEASE</spring-security-crypto>
+       <!-- <version.spring.mongodb>1.10.1.RELEASE</version.spring.mongodb>-->
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.5</version>
+        </dependency>
+
+        <!-- Hibernate framework -->
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${org.hibernate}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${org.hibernate}</version>
+        </dependency>
+
+        <!-- Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA,
+       and iBatis. (depends on spring-core, spring-beans, spring-context, spring-tx)
+       Define this if you need ORM (org.springframework.orm.*) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+            <version>${spring-security-crypto}</version>
+        </dependency>
+
+      <!--  &lt;!&ndash;MongoDB&ndash;&gt;
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>${version.spring.mongodb}</version>
+        </dependency>-->
+
+        <!-- MongoDB драйвер -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.8.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+        <!-- <dependency>
+             <groupId>org.hibernate</groupId>
+             <artifactId>hibernate-core</artifactId>
+             <version>4.3.9.Final</version>
+         </dependency>
+         <dependency>
+             <groupId>org.hibernate</groupId>
+             <artifactId>hibernate-ehcache</artifactId>
+             <version>4.3.9.Final</version>
+         </dependency>
+         <dependency>
+             <groupId>org.hibernate</groupId>
+             <artifactId>hibernate-c3p0</artifactId>
+             <version>4.3.9.Final</version>
+         </dependency>
+         <dependency>
+             <groupId>org.postgresql</groupId>
+             <artifactId>postgresql</artifactId>
+             <version>9.3-1100-jdbc41</version>
+         </dependency>
+         <dependency>
+             <groupId>org.springframework</groupId>
+             <artifactId>spring-orm</artifactId>
+             <version>${spring.versio}</version>
+         </dependency>
+         <dependency>
+             <groupId>org.springframework</groupId>
+             <artifactId>spring-context</artifactId>
+             <version>${spring.versio}</version>
+         </dependency>
+         <dependency>
+             <groupId>javax.validation</groupId>
+             <artifactId>validation-api</artifactId>
+             <version>1.0.0.GA</version>
+         </dependency>-->
+    </dependencies>
+
+</project>

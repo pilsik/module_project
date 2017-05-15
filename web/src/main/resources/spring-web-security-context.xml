@@ -1,0 +1,67 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+    <!-- Empty filter chain for the home page and resources web-->
+    <http pattern="/css/**" security="none"/>
+    <http pattern="/js/**" security="none"/>
+    <http pattern="/image/**" security="none"/>
+
+
+    <http auto-config="false" use-expressions="true" entry-point-ref="loginUrlAuthenticationEntryPoint">
+
+        <custom-filter ref="reCaptchaFilter" before="FORM_LOGIN_FILTER"/>
+
+        <intercept-url pattern="/login*" access="permitAll()"/>
+        <intercept-url pattern="/newUser*" access="hasRole('ROLE_ADMIN')"/>
+        <!--<intercept-url pattern="/*" access="isAuthenticated()"/>-->
+        <intercept-url pattern="/*" access="permitAll()"/>
+
+        <!--<intercept-url pattern="/viewList**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+        <intercept-url pattern="/files**" access="isAuthenticated()" />-->
+        <!--
+        <form-login
+                login-page='/login'
+                default-target-url="/login"
+                authentication-failure-url="/login?error=true"
+                authentication-success-forward-url="/home"
+        />-->
+
+        <!--Потеря сесси-->
+        <logout logout-success-url="/login?logout=true" logout-url="/logout" invalidate-session="true"/>
+
+        <!--  Межсайтовая подделка запроса (защита)-->
+        <csrf/>  <!--Потом включить-->
+
+    </http>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="customUserDetailsService">
+            <password-encoder ref="bcryptEncoder"/>
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="11"/>
+    </beans:bean>
+
+    <beans:bean id="loginUrlAuthenticationEntryPoint"
+                class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <beans:constructor-arg name="loginFormUrl" value="/login"/>
+    </beans:bean>
+
+    <beans:bean id="successHandler"
+                class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+        <beans:property name="defaultTargetUrl" value="/home"/>
+    </beans:bean>
+
+    <beans:bean id="failureHandler"
+                class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <beans:property name="defaultFailureUrl" value="/login?error=true"/>
+    </beans:bean>
+
+</beans:beans>

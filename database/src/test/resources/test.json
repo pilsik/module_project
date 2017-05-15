@@ -1,0 +1,12 @@
+children: [
+{title: "lopiko" , key: "1"},
+{title: "first" , key: "3", isFolder: true,
+children: [
+{title: "second" , key: "4", isFolder: true,
+children: [
+{title: "tree" , key: "5"}]},{title: "four" , key: "6", isFolder: true,
+children: [
+{title: "five" , key: "7"}]}]},
+{title: "test" , key: "8", isFolder: true,
+children: [
+{title: "test" , key: "9"}]}]
