@@ -30,16 +30,16 @@ public class EmployerConverter extends Converter<Employer> {
     DataForXML dataForXML = new DataForXML();
 
     @Override
-    public void convertFileToXML(InputStream inputStream, String extension) throws ExtensionRuntimeException, JAXBException {
+    public void convertFileToXML(InputStream inputStream, String extension, String filepath) throws ExtensionRuntimeException, JAXBException {
         List<Employer> tList = super.geObjectListFromFile(inputStream, extension, xlsReader, csvReader);
         dataForXML.setEmployers(tList);
-        super.nameAndSaveXMLFile(dataForXML);
+        super.nameAndSaveXMLFile(dataForXML, filepath);
     }
 
     @Override
-    public void convertFileToJSON(InputStream inputStream, String extension) throws ExtensionRuntimeException{
+    public void convertFileToJSON(InputStream inputStream, String extension, String filepath) throws ExtensionRuntimeException{
         List<Employer> tList = super.geObjectListFromFile(inputStream, extension, xlsReader, csvReader);
-        super.nameAndSaveJSONFile(tList);
+        super.nameAndSaveJSONFile(tList, filepath);
     }
 
 }

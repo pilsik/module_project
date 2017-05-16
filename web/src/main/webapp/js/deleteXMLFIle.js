@@ -10,7 +10,7 @@ function deleteFile() {
             parentDiv.hide();
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Произошла ошибка");
+            alert("Произошла ошибка при удалении");
         }
     });
 }

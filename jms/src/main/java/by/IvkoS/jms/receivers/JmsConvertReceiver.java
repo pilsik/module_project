@@ -19,20 +19,22 @@ public abstract class JmsConvertReceiver implements MessageListener {
 
     private static final String MESSAGE_PROPERTY_EXTENSION_NAME = "extension";
     private static final String MESSAGE_PROPERTY_EXTENSION_CONVERT_NAME = "extensionConvert";
+    private static final String MESSAGE_PROPERTY_PATH_CREATE_FILE = "filepath";
 
     public void onMessage(Message message) {
         try {
             logger.info("Конвертирование файла");
-            Converter converter =  getConverter();
+            Converter converter = getConverter();
             String extension = message.getStringProperty(MESSAGE_PROPERTY_EXTENSION_NAME);
             String convertExtension = message.getStringProperty(MESSAGE_PROPERTY_EXTENSION_CONVERT_NAME);
+            String filepath = message.getStringProperty(MESSAGE_PROPERTY_PATH_CREATE_FILE);
             byte[] data = new byte[(int) ((BytesMessage) message).getBodyLength()];
             ((BytesMessage) message).readBytes(data);
             InputStream inputStream = new ByteArrayInputStream(data);
             if (convertExtension.equals(Converter.JSON_EXTENSION)) {
-                converter.convertFileToJSON(inputStream, extension);
-            } else if (convertExtension.equals(Converter.XML_EXTENSION)){
-                converter.convertFileToXML(inputStream, extension);
+                converter.convertFileToJSON(inputStream, extension, filepath);
+            } else if (convertExtension.equals(Converter.XML_EXTENSION)) {
+                converter.convertFileToXML(inputStream, extension, filepath);
             } else {
                 logger.warn("Данный формат не поддерживается (ActiveMQ)");
             }

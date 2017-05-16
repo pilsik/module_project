@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -31,9 +32,9 @@ public abstract class Converter<T> {
     public static final String XLS_EXTENSION = "xls";
     private static final String DATE_PATTERN = "yyyy-MM-dd-HH-mm-ss";
 
-    public abstract void convertFileToXML(InputStream inputStream, String extension) throws JAXBException;
+    public abstract void convertFileToXML(InputStream inputStream, String extension, String filepath) throws JAXBException;
 
-    public abstract void convertFileToJSON(InputStream inputStream, String extension);
+    public abstract void convertFileToJSON(InputStream inputStream, String extension, String filepath);
 
     List<T> geObjectListFromFile(InputStream inputStream, String extension, Reader xlsReader, Reader csvReader) {
         List<T> tList = Collections.emptyList();
@@ -49,7 +50,7 @@ public abstract class Converter<T> {
         return tList;
     }
 
-    String nameAndSaveJSONFile(List<T> tList) {
+    String nameAndSaveJSONFile(List<T> tList, String filepath) {
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
        /* Gson gson = new GsonBuilder()
@@ -75,7 +76,7 @@ public abstract class Converter<T> {
                 .create();*/
         String jsonList = gson.toJson(tList);
         String fileName = String.format("%s.%s", new SimpleDateFormat(DATE_PATTERN).format(new Date()), JSON_EXTENSION);
-        File file = new File(fileName);
+        File file = new File(filepath+fileName);
         try(FileWriter writer = new FileWriter(file, false)){
             writer.write(jsonList);
             writer.flush();
@@ -86,12 +87,12 @@ public abstract class Converter<T> {
         return fileName;
     }
 
-    String nameAndSaveXMLFile(DataForXML dataForXML) throws JAXBException {
+    String nameAndSaveXMLFile(DataForXML dataForXML,String filepath) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(DataForXML.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         String fileName = String.format("%s.%s", new SimpleDateFormat(DATE_PATTERN).format(new Date()), XML_EXTENSION);
-        File file = new File(fileName);
+        File file = new File(filepath+fileName);
         jaxbMarshaller.marshal(dataForXML, file);
         logger.info(String.format("Создан файл xml путь %s", file.getAbsoluteFile()));
         return fileName;

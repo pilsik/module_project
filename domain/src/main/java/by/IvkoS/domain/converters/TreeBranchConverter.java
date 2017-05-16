@@ -29,15 +29,15 @@ public class TreeBranchConverter extends Converter<TreeBranch> {
     DataForXML dataForXML = new DataForXML();
 
     @Override
-    public void convertFileToXML(InputStream inputStream, String extension) throws JAXBException {
+    public void convertFileToXML(InputStream inputStream, String extension, String filepath) throws JAXBException {
         List<TreeBranch> tList = super.geObjectListFromFile(inputStream, extension, xlsReader, csvReader);
         dataForXML.setBranches(tList);
-        super.nameAndSaveXMLFile(dataForXML);
+        super.nameAndSaveXMLFile(dataForXML, filepath);
     }
 
     @Override
-    public void convertFileToJSON(InputStream inputStream, String extension) {
+    public void convertFileToJSON(InputStream inputStream, String extension, String filepath) {
         List<TreeBranch> tList = super.geObjectListFromFile(inputStream, extension, xlsReader, csvReader);
-        super.nameAndSaveJSONFile(tList);
+        super.nameAndSaveJSONFile(tList, filepath);
     }
 }

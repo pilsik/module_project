@@ -28,10 +28,15 @@ public class ConvertController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public String convertFile(@RequestParam MultipartFile file, @RequestHeader String extensionConvert, @RequestHeader String type) throws IOException {
+    public String convertFile(@RequestParam MultipartFile file,
+                              @RequestHeader String extensionConvert,
+                              @RequestHeader String type,
+                              HttpServletRequest request) throws IOException {
+        String phyPath = request.getSession().getServletContext().getRealPath("/");
+        String filepath = phyPath+"file" + File.separator;
         int nameLength = file.getOriginalFilename().length();
-        String extension = file.getOriginalFilename().substring(nameLength-3);
-        catalogJmsSender.sendMessages(file.getInputStream(), extension, extensionConvert, type);
+        String extension = file.getOriginalFilename().substring(nameLength - 3);
+        catalogJmsSender.sendMessages(file.getInputStream(), extension, extensionConvert, type, filepath);
         return "./files/";
     }
 

@@ -33,7 +33,7 @@ public class CatalogJmsSender {
     protected Destination convertDestinationTreeBranch;
 
 
-    public void sendMessages(InputStream inputStream, String extension, String extensionConvert, String type) {
+    public void sendMessages(InputStream inputStream, String extension, String extensionConvert, String type, String filepath) {
         if (type.equals("tree")) {
             this.jmsTemplate.setDefaultDestination(convertDestinationTreeBranch);
             logger.warn("выбрана очередь для tree");
@@ -48,6 +48,7 @@ public class CatalogJmsSender {
                 message.writeBytes(bytes);
                 message.setStringProperty("extension", extension);
                 message.setStringProperty("extensionConvert", extensionConvert);
+                message.setStringProperty("filepath", filepath);
             } catch (IOException e) {
                 e.printStackTrace();
             }

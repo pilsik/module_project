@@ -36,6 +36,10 @@
             <a href="${searchUrl}">Поиск</a>
         </li>
         <li>
+            <spring:url value="/manager" var="managerUrl" htmlEscape="true"/>
+            <a href="${managerUrl}">Manager</a>
+        </li>
+        <li>
             <c:url value="/logout" var="logoutUrl" />
             <form action="${logoutUrl}" method="post">
                 <input type="submit" value="Logout"/>
