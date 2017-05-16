@@ -36,7 +36,7 @@
             <a href="${searchUrl}">Поиск</a>
         </li>
         <li>
-            <spring:url value="/manager" var="managerUrl" htmlEscape="true"/>
+            <spring:url value="/managerFiles" var="managerUrl" htmlEscape="true"/>
             <a href="${managerUrl}">Manager</a>
         </li>
         <li>

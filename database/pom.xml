@@ -18,7 +18,7 @@
     <properties>
         <org.hibernate>5.2.8.Final</org.hibernate>
         <spring-security-crypto>4.2.2.RELEASE</spring-security-crypto>
-       <!-- <version.spring.mongodb>1.10.1.RELEASE</version.spring.mongodb>-->
+        <version.spring.mongodb>1.10.1.RELEASE</version.spring.mongodb>
     </properties>
 
     <build>
@@ -35,7 +35,6 @@
     </build>
 
     <dependencies>
-
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
@@ -75,12 +74,12 @@
             <version>${spring-security-crypto}</version>
         </dependency>
 
-      <!--  &lt;!&ndash;MongoDB&ndash;&gt;
+        <!--MongoDB-->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-mongodb</artifactId>
             <version>${version.spring.mongodb}</version>
-        </dependency>-->
+        </dependency>
 
         <!-- MongoDB драйвер -->
         <dependency>
@@ -89,21 +88,24 @@
             <version>3.4.2</version>
         </dependency>
 
+        <!--This project contains core low-level incremental ("streaming")
+         parser and generator abstractions used by Jackson Data Processor.-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.8.7</version>
         </dependency>
+
+        <!--Gson is a Java library that can be used to convert Java Objects into their JSON representation.
+         It can also be used to convert a JSON string to an equivalent Java object. Gson can work with arbitrary
+         Java objects including pre-existing objects that you do not have source-code of.-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>RELEASE</version>
-        </dependency>
+
+
 
         <!-- <dependency>
              <groupId>org.hibernate</groupId>

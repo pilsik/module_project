@@ -8,6 +8,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:spring-web-context.xml
+            classpath:spring-rest-config.xml
             classpath:spring-web-security-context.xml
         </param-value>
     </context-param>
@@ -37,6 +38,7 @@
             <param-value>
                 classpath:spring-web-context.xml
                 classpath:spring-web-security-context.xml
+                classpath:spring-rest-config.xml
             </param-value>
         </init-param>
         <load-on-startup>2</load-on-startup>

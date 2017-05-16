@@ -112,13 +112,6 @@
             </exclusions>
         </dependency>
 
-
-        <!--   <dependency>
-               <groupId>by.IvkoS</groupId>
-               <artifactId>restfull</artifactId>
-               <version>1.0</version>
-           </dependency>-->
-
     </dependencies>
 
 </project>

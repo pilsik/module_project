@@ -17,6 +17,7 @@
       <module name="domain" target="1.8" />
       <module name="jms" target="1.8" />
       <module name="module_project" target="1.8" />
+      <module name="rest" target="1.8" />
       <module name="web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
