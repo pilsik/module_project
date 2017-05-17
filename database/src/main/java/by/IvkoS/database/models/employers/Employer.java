@@ -22,7 +22,7 @@ public class Employer {
     @Column(name = "lastname")
     private String lastName;
     @Column(name = "firstname")
-    private String firstName;
+        private String firstName;
     @Column(name = "prone_number")
     private int numberPhone;
 

@@ -1,4 +1,4 @@
-package by.IvkoS.web.convertors;
+package by.IvkoS.web.converters;
 
 import by.IvkoS.database.models.clients.security.UserProfile;
 import by.IvkoS.database.services.UserProfileService;

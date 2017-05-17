@@ -21,6 +21,15 @@
           <file>file://$MODULE_DIR$/src/main/resources/spring-web-context.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring-web-security-context.xml</file>
         </fileset>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/../database/src/main/resources/spring-context-db.xml</file>
+          <file>file://$MODULE_DIR$/../database/src/main/resources/spring-mongo-db.xml</file>
+          <file>file://$MODULE_DIR$/../domain/src/main/resources/spring-context-domain.xml</file>
+          <file>file://$MODULE_DIR$/../jms/src/main/resources/spring-context-jms.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-rest-config.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-web-context.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-web-security-context.xml</file>
+        </fileset>
       </configuration>
     </facet>
   </component>

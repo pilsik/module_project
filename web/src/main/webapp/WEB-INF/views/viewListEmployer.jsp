@@ -5,33 +5,35 @@
 
 <tiles:insertDefinition name="defaultTemplate">
 
-    <tiles:putAttribute name="title" value="Список сотрудников" />
+    <tiles:putAttribute name="title" value="Список сотрудников"/>
 
     <tiles:putAttribute name="body">
-            <table class="table">
-                <thead class="thead-inverse">
-                <tr>
-                    <th>Код клиента:</th>
-                    <th>Фамилия клиента:</th>
-                    <th>Имя клиента:</th>
-                    <th>Телефон:</th>
-                    <th>Профессии:</th>
+        <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Код клиента:</th>
+                <th>Фамилия клиента:</th>
+                <th>Имя клиента:</th>
+                <th>Телефон:</th>
+                <th>Профессии:</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${data}" var="data" varStatus="status">
+                <tr valign="top"
+                        <c:if test="${data.idEmployer==index}">
+                            bgcolor="#FF0000"
+                        </c:if>
+                    onclick="document.location = '/employer/id/${data.idEmployer}';"
+                >
+                    <th>${data.idEmployer}</th>
+                    <td>${data.lastName}</td>
+                    <td>${data.firstName}</td>
+                    <td>${data.numberPhone}</td>
+                    <td>${data.showPositions()}</td>
                 </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${data}" var="data" varStatus="status">
-                    <tr valign="top"
-                            <c:if test="${data.getIdEmployer()==index}">
-                                bgcolor="#FF0000"
-                            </c:if> >
-                        <th>${data.getIdEmployer()}</th>
-                        <td>${data.getLastName()}</td>
-                        <td>${data.getFirstName()}</td>
-                        <td>${data.getNumberPhone()}</td>
-                        <td>${data.showPositions()}</td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+            </c:forEach>
+            </tbody>
+        </table>
     </tiles:putAttribute>
 </tiles:insertDefinition>

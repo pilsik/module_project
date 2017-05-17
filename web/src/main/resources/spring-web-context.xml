@@ -56,7 +56,6 @@
         </property>
     </bean>
 
-
    <!-- Configure Converter to be used.
     In our example, we need a converter to convert string values[Roles] to UserProfiles in newUser.jsp
     Only interesting thing in this class is registration of a converter who will be responsible for
@@ -66,7 +65,8 @@
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
-                <bean id="roleToUserProfile" class="by.IvkoS.web.convertors.RoleToUserProfileConverter" />
+                <bean id="roleToUserProfile" class="by.IvkoS.web.converters.RoleToUserProfileConverter" />
+                <bean id="positionToEmployerPositionConverter" class="by.IvkoS.web.converters.PositionToEmployerPositionConverter" />
             </set>
         </property>
     </bean>
