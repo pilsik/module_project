@@ -27,7 +27,7 @@ public class GenericDaoJpaImpl<T, PK extends Serializable>
     @Override
     @Transactional
     public T create(T t) {
-        this.hibernateTemplate.persist(t);
+        this.hibernateTemplate.saveOrUpdate(t);
         return t;
     }
 

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="user_profile")
-public class UserProfile {
+public class UserProfile  implements java.io.Serializable{
 
     public static final UserProfile USER_EMPTY = new UserProfile();
 

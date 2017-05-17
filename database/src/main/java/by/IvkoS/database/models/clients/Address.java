@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "address")
-public class Address {
+public class Address  implements java.io.Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

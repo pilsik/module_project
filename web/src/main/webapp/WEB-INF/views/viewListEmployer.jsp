@@ -2,6 +2,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <tiles:insertDefinition name="defaultTemplate">
 
@@ -16,6 +17,7 @@
                 <th>Имя клиента:</th>
                 <th>Телефон:</th>
                 <th>Профессии:</th>
+                <th>Удалить</th>
             </tr>
             </thead>
             <tbody>
@@ -31,9 +33,15 @@
                     <td>${data.firstName}</td>
                     <td>${data.numberPhone}</td>
                     <td>${data.showPositions()}</td>
+                    <td>
+                        <form:form method="DELETE" action="/employer/id/${data.idEmployer}">
+                            <input type="submit" id="btnSubmit" name="btnSubmit" value="DELETE"/>
+                        </form:form>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
+        <a href="/employer/create" class="btn btn-info" role="button">Creare new Employer</a>
     </tiles:putAttribute>
 </tiles:insertDefinition>

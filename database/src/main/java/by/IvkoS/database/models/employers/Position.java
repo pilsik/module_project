@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "position")
-public class Position{
+public class Position  implements java.io.Serializable{
 
     public static final Position EMPTY_POSITION = new Position();
 

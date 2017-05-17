@@ -16,5 +16,4 @@ public class PositionDaoImpl extends GenericDaoJpaImpl<Position,Integer> impleme
                 .findByNamedParam("from Position as position where position.positionName=:positionName", "positionName", new Object[]{positionName});
         return (position.size() != 0) ? position.get(INDEX_FIRST_POSITION_AT_LIST) : Position.EMPTY_POSITION;
     }
-    
 }

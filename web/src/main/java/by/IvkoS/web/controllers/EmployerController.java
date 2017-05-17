@@ -23,18 +23,41 @@ public class EmployerController {
     PositionService positionService;
 
     @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
-    public String getEmployer(@PathVariable("id") Integer id, ModelMap modelMap){
+    public String getEmployer(@PathVariable("id") Integer id, ModelMap modelMap) {
         Employer employer = employerService.getEmployerById(id);
         List positionsList = positionService.getPositionList();
-        modelMap.addAttribute("employer" , employer);
-        modelMap.addAttribute("positionsList" , positionsList);
+        modelMap.addAttribute("employer", employer);
+        modelMap.addAttribute("positionsList", positionsList);
         return "singleEmployer";
     }
 
-    @RequestMapping(value = "/id/*", method = RequestMethod.POST)
-    public String updateEmployer(Employer employer){
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.PUT)
+    public String updateEmployer(@PathVariable("id") Integer id, Employer employer) {
         employerService.updateEmployer(employer);
-        return "redirect:/employer/id/"+employer.getIdEmployer();
+        return "redirect:/employer/id/" + employer.getIdEmployer();
+    }
+
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.DELETE)
+    public String deleteEmployer(@PathVariable("id") Integer id) {
+        employerService.removeEmployerById(id);
+        return "redirect:/viewListEmployer";
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String createEmployer(ModelMap modelMap) {
+        Employer employer = new Employer();
+        List positionsList = positionService.getPositionList();
+        modelMap.addAttribute("employer", employer);
+        modelMap.addAttribute("positionsList", positionsList);
+        return "singleEmployer";
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String addEmployer(Employer employer) {
+        System.out.println(employer.getIdEmployer());
+        employer = employerService.addEmployer(employer);
+        System.out.println(employer.getIdEmployer());
+        return "redirect:/employer/id/" + employer.getIdEmployer();
     }
 
 }

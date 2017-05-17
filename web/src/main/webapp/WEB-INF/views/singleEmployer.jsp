@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,9 +9,13 @@
 
     <tiles:putAttribute name="body">
 
-        <div class="form-container">
+        <c:set var="formMethod" value="PUT"/>
+        <c:if test="${requestScope['javax.servlet.forward.request_uri'] == '/employer/create'}">
+            <c:set var="formMethod" value="POST"/>
+        </c:if>
 
-            <form:form method="POST" modelAttribute="employer" class="form-horizontal">
+        <div class="form-container">
+            <form:form method="${formMethod}" modelAttribute="employer" class="form-horizontal">
 
                 <form:input type="hidden" path="idEmployer"/>
 
@@ -46,7 +50,8 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="positions_now">Positions now</label>
                         <div class="col-md-7">
-                            <input id="positions_now" value="${employer.showPositions()}" readonly="readonly" class="form-control  input-sm">
+                            <input id="positions_now" value="${employer.showPositions()}" readonly="readonly"
+                                   class="form-control  input-sm">
                         </div>
                     </div>
                 </div>

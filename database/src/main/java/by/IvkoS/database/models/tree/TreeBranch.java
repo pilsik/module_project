@@ -11,7 +11,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "treetable")
-public class TreeBranch {
+public class TreeBranch  implements java.io.Serializable{
 
     @Id
     @Column(name = "branch_id")

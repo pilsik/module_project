@@ -12,7 +12,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "employer")
-public class Employer {
+public class Employer  implements java.io.Serializable{
     public static final Employer EMPTY_EMPLOYER = new Employer();
 
     @Id
@@ -22,20 +22,15 @@ public class Employer {
     @Column(name = "lastname")
     private String lastName;
     @Column(name = "firstname")
-        private String firstName;
+    private String firstName;
     @Column(name = "prone_number")
     private int numberPhone;
 
     @ManyToMany(fetch = FetchType.EAGER,
-            cascade =
-                    {
-                            CascadeType.MERGE,
-                            CascadeType.REFRESH,
-                            CascadeType.PERSIST
-                    },  targetEntity = Position.class)
+            cascade = CascadeType.ALL, targetEntity = Position.class)
     @JoinTable(name = "employer_position", joinColumns = {
             @JoinColumn(name = "idemployer", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "idposition", insertable = false,nullable = false, updatable = false)})
+            inverseJoinColumns = {@JoinColumn(name = "idposition", insertable = false, nullable = false, updatable = false)})
     @XmlTransient
     private Set<Position> positions = new HashSet<Position>();
 
