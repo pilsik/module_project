@@ -96,7 +96,12 @@
     </filter-mapping>
     <!--PUT,DELETE,UPDATE-->
 
-
     <!-- /Filters -->
+
+    <!--Remember me-->
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
+    <!--Remember me-->
 
 </web-app>

@@ -11,31 +11,30 @@
     <http pattern="/js/**" security="none"/>
     <http pattern="/image/**" security="none"/>
 
-
     <http auto-config="false" use-expressions="true" entry-point-ref="loginUrlAuthenticationEntryPoint">
 
-        <custom-filter ref="reCaptchaFilter" before="FORM_LOGIN_FILTER"/>
+        <custom-filter ref="reCaptchaFilter" after="FORM_LOGIN_FILTER"/>
 
         <intercept-url pattern="/login*" access="permitAll()"/>
+        <intercept-url pattern="/home*" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/newUser*" access="hasRole('ROLE_ADMIN')"/>
-        <!--<intercept-url pattern="/*" access="isAuthenticated()"/>-->
         <intercept-url pattern="/*" access="permitAll()"/>
+        <!--<intercept-url pattern="/*" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/viewList**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />-->
+        <!--  <intercept-url pattern="/files**" access="isAuthenticated()" />-->
+        <!-- otherwise you’ll end up having the ReCaptchaAuthenticationFilter and
+         the UsernamePasswordAuthenticationFilter at the same time ( the <form-login>
+         tag is translated by Spring Security into a UsernamePasswordAuthenticationFilter)-->
 
-        <!--<intercept-url pattern="/viewList**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
-        <intercept-url pattern="/files**" access="isAuthenticated()" />-->
-        <!--
-        <form-login
-                login-page='/login'
-                default-target-url="/login"
-                authentication-failure-url="/login?error=true"
-                authentication-success-forward-url="/home"
-        />-->
+       <!-- <remember-me data-source-ref="idDataSource"/>-->
 
         <!--Потеря сесси-->
-        <logout logout-success-url="/login?logout=true" logout-url="/logout" invalidate-session="true"/>
+        <logout logout-success-url="/login?logout=true"
+                logout-url="/logout"
+                invalidate-session="true"/>
 
         <!--  Межсайтовая подделка запроса (защита)-->
-        <csrf/>  <!--Потом включить-->
+        <csrf/>
 
     </http>
 

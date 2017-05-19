@@ -8,7 +8,7 @@ $(document).ready(function () {
     $regionSelectDiv.show();
     $showCookieDiv.hide();
 
-    var nameRegion = getCookie($('#user_name').val() + "Region");
+    var nameRegion = getCookie("Region");
 
     if (nameRegion) {
         showCookie(nameRegion);
@@ -19,13 +19,13 @@ $(document).ready(function () {
         if (regionSelectValue == "") {
             alert(errorRegion);
         } else {
-            setCookie($(this).data('user'), regionSelectValue, 1);
+            setCookie(regionSelectValue, 1);
             showCookie();
         }
     });
 
     $('#deleteRegionToCookies').click(function () {
-            setCookie($(this).data('user'), "", -1);
+            setCookie("", -1);
             showRegionSelect();
         }
     );
@@ -47,7 +47,7 @@ $(document).ready(function () {
 
 });
 
-function setCookie(name, value, countDay) {
+function setCookie(value, countDay) {
     if (countDay) {
         var date = new Date;
         date.setDate(date.getDate() + countDay);
@@ -55,7 +55,7 @@ function setCookie(name, value, countDay) {
     } else {
         expires = "";
     }
-    document.cookie = name + 'Region=' + value + expires;
+    document.cookie ='Region=' + value + expires;
 }
 
 function getCookie(name) {

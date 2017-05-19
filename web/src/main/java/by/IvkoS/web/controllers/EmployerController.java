@@ -39,7 +39,9 @@ public class EmployerController {
 
     @RequestMapping(value = "/id/{id}", method = RequestMethod.DELETE)
     public String deleteEmployer(@PathVariable("id") Integer id) {
-        employerService.removeEmployerById(id);
+        Employer employer =employerService.getEmployerById(id);
+        employer.setPositions(null);
+        employerService.removeEmployer(employer);
         return "redirect:/viewListEmployer";
     }
 
