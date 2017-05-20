@@ -13,7 +13,8 @@
 
     <http auto-config="false" use-expressions="true" entry-point-ref="loginUrlAuthenticationEntryPoint">
 
-        <custom-filter ref="reCaptchaFilter" after="FORM_LOGIN_FILTER"/>
+        <custom-filter ref="reCaptchaFilter" position="FORM_LOGIN_FILTER"/>
+        <custom-filter ref="rememberMeProcessingFilter" position="REMEMBER_ME_FILTER"/>
 
         <intercept-url pattern="/login*" access="permitAll()"/>
         <intercept-url pattern="/home*" access="hasRole('ROLE_ADMIN')"/>
@@ -26,12 +27,13 @@
          the UsernamePasswordAuthenticationFilter at the same time ( the <form-login>
          tag is translated by Spring Security into a UsernamePasswordAuthenticationFilter)-->
 
-       <!-- <remember-me data-source-ref="idDataSource"/>-->
+        <!--<remember-me data-source-ref="idDataSource"/>-->
 
         <!--Потеря сесси-->
         <logout logout-success-url="/login?logout=true"
                 logout-url="/logout"
-                invalidate-session="true"/>
+                invalidate-session="true"
+                delete-cookies="JSESSIONID,remember-me"/>
 
         <!--  Межсайтовая подделка запроса (защита)-->
         <csrf/>
@@ -39,10 +41,35 @@
     </http>
 
     <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="rememberMeAuthenticationProvider"/>
         <authentication-provider user-service-ref="customUserDetailsService">
             <password-encoder ref="bcryptEncoder"/>
         </authentication-provider>
     </authentication-manager>
+
+    <beans:bean id="rememberMeProcessingFilter"
+                class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
+        <beans:property name="authenticationSuccessHandler" ref="successHandler"/>
+        <beans:constructor-arg index="0" ref="authenticationManager"/>
+        <beans:constructor-arg index="1" ref="rememberMeServices"/>
+    </beans:bean>
+
+    <beans:bean id="rememberMeServices"
+                class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
+        <beans:constructor-arg index="0" value="key"/>
+        <beans:constructor-arg index="1" ref="customUserDetailsService"/>
+        <beans:constructor-arg index="2" ref="tokenRepository"/>
+    </beans:bean>
+
+    <beans:bean id="tokenRepository"
+                class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
+        <beans:property name="dataSource" ref="idDataSource"/>
+    </beans:bean>
+
+    <beans:bean id="rememberMeAuthenticationProvider"
+                class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+        <beans:constructor-arg value="key"/>
+    </beans:bean>
 
     <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <beans:constructor-arg name="strength" value="11"/>

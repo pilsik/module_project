@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-
+        logger.info("ПРОВЕРКА ПОЛЬЗОВАТЕЛЯ");
         User user = userService.findUserByLogin(login);
 
         if (user == User.EMPTY_USER) {

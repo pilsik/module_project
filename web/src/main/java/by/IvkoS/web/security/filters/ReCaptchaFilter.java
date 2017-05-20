@@ -6,6 +6,7 @@ import by.IvkoS.web.security.validation.ValidationResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,8 +14,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
@@ -23,21 +26,29 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Component("reCaptchaFilter")
+@Component
 @PropertySource("classpath:reCAPTCHA.properties")
 public class ReCaptchaFilter extends UsernamePasswordAuthenticationFilter {
 
     public static final Logger logger = LoggerFactory.getLogger(ReCaptchaFilter.class);
 
     @Value("${google.recaptcha.key.secret}")
-    private String secretKey;
+    private String secretKey ="6Ld2mhkUAAAAAHsmDbDHFuzjeGSBCgwWMg3vkgWf";
 
     @Value("${google.recaptcha.URL}")
-    private String reCaptchaUrl;
+    private String reCaptchaUrl="https://www.google.com/recaptcha/api/siteverify";
+
+    @Autowired
+    @Qualifier("rememberMeServices")
+    @Override
+    public void setRememberMeServices(RememberMeServices rememberMeServices) {
+        super.setRememberMeServices(rememberMeServices);
+    }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
+        logger.info("ПРОВЕРКА RECAPTHCA");
         if (getUsernameParameter() == null) {
             throw new RecaptchaAuthenticationException("Username empty");
         }
