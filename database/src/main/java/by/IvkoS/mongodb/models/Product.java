@@ -16,14 +16,14 @@ public class Product implements Serializable{
     private String name;
     private String description;
     private String producer;
-    private String imgPath;
+    private String[] imgPath;
     private double price;
     private String type;
 
     public Product() {
     }
 
-    public Product(String name, String description, String producer, String imgPath, double price, String type) {
+    public Product(String name, String description, String producer, String[] imgPath, double price, String type) {
 
         this.name = name;
         this.description = description;
@@ -33,12 +33,20 @@ public class Product implements Serializable{
         this.type = type;
     }
 
-    public Product(Long id, String name, String description, String producer, String imgPath, double price, String type) {
+    public Product(Long id, String name, String description, String producer, String[] imgPath, double price, String type) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.producer = producer;
         this.imgPath = imgPath;
+        this.price = price;
+        this.type = type;
+    }
+
+    public Product(String name, String description, String producer, double price, String type) {
+        this.name = name;
+        this.description = description;
+        this.producer = producer;
         this.price = price;
         this.type = type;
     }
@@ -92,11 +100,11 @@ public class Product implements Serializable{
         this.producer = producer;
     }
 
-    public String getImgPath() {
+    public String[] getImgPath() {
         return imgPath;
     }
 
-    public void setImgPath(String imgPath) {
+    public void setImgPath(String[] imgPath) {
         this.imgPath = imgPath;
     }
 

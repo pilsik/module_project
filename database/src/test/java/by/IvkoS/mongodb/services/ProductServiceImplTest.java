@@ -20,7 +20,7 @@ public class ProductServiceImplTest {
 
     @Test
     public void add() throws Exception {
-        Product product = new Product("test", "test", "test", "test", 11, "test");
+        Product product = new Product("test", "test", "test",new String[]{"text"}, 11, "test");
         int count = productService.getAll().size();
         productService.add(product);
         productService.remove(product.getId());
@@ -29,7 +29,7 @@ public class ProductServiceImplTest {
 
     @Test
     public void update() throws Exception {
-        Product product = new Product("test", "test", "test", "test", 11, "test");
+        Product product = new Product("test", "test", "test", new String[]{"text"}, 11, "test");
         int count = productService.getAll().size();
         productService.add(product);
         product.setName("test1test1");
@@ -41,7 +41,7 @@ public class ProductServiceImplTest {
 
     @Test
     public void get() throws Exception {
-        Product product = new Product("test", "test", "test","test", 11, "test");
+        Product product = new Product("test", "test", "test",new String[]{"text"}, 11, "test");
         int count = productService.getAll().size();
         productService.add(product);
         Product product2 = productService.get(product.getId());
@@ -52,8 +52,8 @@ public class ProductServiceImplTest {
 
     @Test
     public void getAll() throws Exception {
-        Product product = new Product("test4", "test4", "test4", "test",11, "test");
-        Product product1 = new Product("test4", "test4", "test4","test", 11, "test");
+        Product product = new Product("test4", "test4", "test4", new String[]{"text"},11, "test");
+        Product product1 = new Product("test4", "test4", "test4",new String[]{"text"}, 11, "test");
         int count = productService.getAll().size();
         productService.add(product);
         productService.add(product1);
@@ -65,7 +65,7 @@ public class ProductServiceImplTest {
 
     @Test
     public void remove() throws Exception {
-        Product product = new Product("test5", "test5", "test5","test", 11, "test");
+        Product product = new Product("test5", "test5", "test5",new String[]{"text"}, 11, "test");
         int count = productService.getAll().size();
         productService.add(product);
         productService.remove(product.getId());
@@ -75,11 +75,11 @@ public class ProductServiceImplTest {
     @Test
     public void getAllByType() throws Exception {
         int count = productService.getAll().size();
-        Product product1 = new Product("test1", "test1", "test2","test", 11.20, "test1");
-        Product product2 = new Product("test2", "test1", "test2","test", 11.20, "test1");
-        Product product3 = new Product("test3", "test2", "test3","test", 11.20, "test1");
-        Product product4 = new Product("test4", "test3", "test4","test",11.20, "test4");
-        Product product5 = new Product("test5", "test4", "test5", "test",11.20, "test5");
+        Product product1 = new Product("test1", "test1", "test2",new String[]{"text"}, 11.20, "test1");
+        Product product2 = new Product("test2", "test1", "test2",new String[]{"text"}, 11.20, "test1");
+        Product product3 = new Product("test3", "test2", "test3",new String[]{"text"}, 11.20, "test1");
+        Product product4 = new Product("test4", "test3", "test4",new String[]{"text"},11.20, "test4");
+        Product product5 = new Product("test5", "test4", "test5", new String[]{"text"},11.20, "test5");
         productService.add(product1);
         productService.add(product2);
         productService.add(product3);

@@ -77,6 +77,10 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.7.RELEASE" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.12" />
+          <element id="library" level="project" name="Maven: com.jcabi:jcabi-log:0.17.1" />
+          <element id="library" level="project" name="Maven: com.jcabi:jcabi-aspects:0.22" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.4" />
+          <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
         </element>
       </element>
       <element id="directory" name="META-INF">
