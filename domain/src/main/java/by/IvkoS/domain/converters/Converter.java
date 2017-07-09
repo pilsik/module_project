@@ -53,27 +53,6 @@ public abstract class Converter<T> {
     String nameAndSaveJSONFile(List<T> tList, String filepath) {
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
-       /* Gson gson = new GsonBuilder()
-                .setExclusionStrategies(new ExclusionStrategy() {
-
-                    public boolean shouldSkipClass(Class<?> clazz) {
-                        return false;
-                    }
-
-                    *//**
-                     * Custom field exclusion goes here
-                     *//*
-                    public boolean shouldSkipField(FieldAttributes f) {
-                        return (f.getName().equals("employers"));
-                    }
-
-                })
-                *//**
-                 * Use serializeNulls method if you want To serialize null values
-                 * By default, Gson does not serialize null values
-                 *//*
-                .serializeNulls()
-                .create();*/
         String jsonList = gson.toJson(tList);
         String fileName = String.format("%s.%s", new SimpleDateFormat(DATE_PATTERN).format(new Date()), JSON_EXTENSION);
         File file = new File(filepath+fileName);

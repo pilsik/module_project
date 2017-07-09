@@ -33,19 +33,11 @@ public class ConvertController {
                               @RequestHeader String type,
                               HttpServletRequest request) throws IOException {
         String phyPath = request.getSession().getServletContext().getRealPath("/");
-        String filepath = phyPath+"file" + File.separator;
+        String filepath = phyPath + "file" + File.separator;
         int nameLength = file.getOriginalFilename().length();
         String extension = file.getOriginalFilename().substring(nameLength - 3);
         catalogJmsSender.sendMessages(file.getInputStream(), extension, extensionConvert, type, filepath);
         return "./files/";
     }
 
-    /* String phyPath = request.getSession().getServletContext().getRealPath("/");
-        String filepath = phyPath + "files/";
-     if (fileNameProp.equals("xls")) {
-            downloadFile = xslConverter.convertFile(file, filepath);
-        } else{
-            downloadFile = csvConverter.convertFile(file, filepath);
-        }*/
-    //return "./files/" + downloadFile;
 }

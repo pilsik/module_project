@@ -76,8 +76,8 @@
                                name="_spring_security_remember_me"
                                id="_spring_security_remember_me"
                                value="true" />&nbsp;Remember me
-                        Remember Me: <input type="checkbox" id="remember" name="remember-me"/>
-                        Remember Me-2: <input type="checkbox" id="remember-2" name="_spring_security_remember_me’"/>
+<%--                        Remember Me: <input type="checkbox" id="remember" name="remember-me"/>
+                        Remember Me-2: <input type="checkbox" id="remember-2" name="_spring_security_remember_me’"/>--%>
                     </form>
                 </div>
             </div>

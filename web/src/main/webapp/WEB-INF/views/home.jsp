@@ -17,16 +17,15 @@
         <div class="row">
             <c:if test="${pageContext.request.userPrincipal.name != null}">
                 <h2>
-                    Welcome : ${pageContext.request.userPrincipal.name} | <a
-                        href="javascript:formSubmit()"> Logout</a>
+                    Welcome : ${pageContext.request.userPrincipal.name}
                 </h2>
             </c:if>
-            <sec:authorize access="isRememberMe()">
+           <%-- <sec:authorize access="isRememberMe()">
                 <h2># This user is login by "Remember Me Cookies".</h2>
             </sec:authorize>
             <sec:authorize access="isFullyAuthenticated()">
                 <h2># This user is login by username / password.</h2>
-            </sec:authorize>
+            </sec:authorize>--%>
         </div>
         <div class="row">
             <div id="regionSelectDiv">

@@ -4,14 +4,15 @@
 
     <display-name>TestWeb</display-name>
 
-    <context-param>
+  <!-- twice load context
+  <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:spring-web-context.xml
             classpath:spring-rest-config.xml
             classpath:spring-web-security-context.xml
         </param-value>
-    </context-param>
+    </context-param>-->
 
 
     <!--
@@ -20,9 +21,10 @@
 	  - WebApplicationContextUtils.getWebApplicationContext(servletContext).
 	-->
     <!-- Creates the Spring Container shared by all Servlet and Filters -->
-    <listener>
+    <!-- error with twice load context-->
+    <!--<listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+    </listener>-->
     <listener>
         <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
     </listener>
@@ -41,7 +43,7 @@
                 classpath:spring-rest-config.xml
             </param-value>
         </init-param>
-        <load-on-startup>2</load-on-startup>
+        <load-on-startup>1</load-on-startup>
         <multipart-config/>
     </servlet>
 

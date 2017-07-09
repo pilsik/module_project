@@ -17,7 +17,6 @@ public class ProductDaoImpl implements ProductDao {
 
     public void save(Product product) {
         mongoOperations.save(product);
-
     }
 
     public Product get(Long id) {
@@ -34,6 +33,6 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<Product> getAllByType(String type) {
-        return mongoOperations.find(Query.query(Criteria.where("type").is(type)),Product.class);
+        return mongoOperations.find(Query.query(Criteria.where("type").is(type)), Product.class);
     }
 }

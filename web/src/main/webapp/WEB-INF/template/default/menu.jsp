@@ -7,10 +7,10 @@
             <spring:url value="/home" var="homeUrl" htmlEscape="true"/>
             <a href="${homeUrl}">Home</a>
         </li>
-        <li>
+      <%--  <li>
             <spring:url value="/about" var="aboutUrl" htmlEscape="true"/>
             <a href="${aboutUrl}">About</a>
-        </li>
+        </li>--%>
         <li>
             <spring:url value="/newUser" var="newUserUrl" htmlEscape="true"/>
             <a href="${newUserUrl}">New Client</a>
@@ -38,6 +38,14 @@
         <li>
             <spring:url value="/managerFiles" var="managerUrl" htmlEscape="true"/>
             <a href="${managerUrl}">Manager</a>
+        </li>
+        <li>
+            <spring:url value="/products/addProduct" var="addProductUrl" htmlEscape="true"/>
+            <a href="${addProductUrl}">Add Product</a>
+        </li>
+        <li>
+            <spring:url value="/rest/products" var="productsUrl" htmlEscape="true"/>
+            <a href="${productsUrl}">Products json</a>
         </li>
         <li>
             <c:url value="/logout" var="logoutUrl" />
